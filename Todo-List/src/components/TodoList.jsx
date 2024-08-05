@@ -58,6 +58,12 @@ const TodoList = () => {
     setIsEditing(true);
     setCurrentTaskIndex(index);
   };
+  const handleMarkAsDone = (index) => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === index ? { ...task, completed: true } : task
+    );
+    setTasks(updatedTasks);
+  };
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">
@@ -85,6 +91,11 @@ const TodoList = () => {
             >
               Edit
             </button>
+            {!task.completed && (
+              <button onClick={() => handleMarkAsDone(index)}>
+                Mark as Done
+              </button>
+            )}
           </li>
         ))}
       </ul>
